@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Real-Time Data Stream</title>
+</head>
+<body>
+    <h1>Real-Time Data Stream</h1>
+    <div id="data-stream-container"></div>
+
+    <script>
+const socket = new WebSocket('ws://' + window.location.host + '/ws/data-stream/');
+
+socket.onmessage = function(event) {
+    const data = JSON.parse(event.data);
+    console.log(data.message);
+    // Update the UI with the received real-time data
+};
+
+socket.onopen = function() {
+    // Send data to the server
+    socket.send(JSON.stringify({ 'message': 'Hello, server!' }));
+};
+    </script>
+        
